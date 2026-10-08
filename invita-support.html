@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Support | Invita</title>
+<meta name="description" content="Questions fréquentes sur Invita : compte, invitation simple ou spéciale, photos et musique, PDF, durée de visibilité, mot de passe oublié et suppression du compte.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://invita.app/invita-support.html">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --cream:#FDF8F3; --cream-2:#FFFCF9;
+    --rose:#9E3A5C; --rose-deep:#7A2847; --rose-pale:#FBEAF0;
+    --gold:#C9A227; --gold-deep:#A3831A; --navy:#15204A;
+    --ink:#241512; --slate:#6E5F58; --line:#F0E1E6; --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: calc(92px + env(safe-area-inset-top,0px));}
+  html,body{margin:0; padding:0; background:var(--white); color:var(--ink);}
+  body{
+    font-family:'Space Grotesk', -apple-system, sans-serif; font-weight:400;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img{max-width:100%; display:block;}
+  a{ color:inherit; }
+  ::selection{ background:var(--rose); color:var(--white); }
+  .serif{ font-family:'Fraunces', Georgia, serif; }
+
+  /* ---------- Header ---------- */
+  .nav-wrap{ position:fixed; top: calc(16px + env(safe-area-inset-top,0px)); left:0; right:0; display:flex; justify-content:center; z-index:100; padding: 0 20px; pointer-events:none; }
+  .nav{
+    pointer-events:auto; display:flex; align-items:center; gap:clamp(18px, 3vw, 40px);
+    padding: 9px 14px; border-radius:999px; background:rgba(255,255,255,0.82);
+    border:1px solid var(--line); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 8px 28px rgba(80,20,40,0.09); transition: background .4s ease, box-shadow .4s ease; max-width: calc(100vw - 24px);
+  }
+  .nav.scrolled{ background: rgba(255,255,255,0.96); box-shadow: 0 8px 28px rgba(80,20,40,0.15); }
+  .brand{ font-weight:700; font-size:17px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:9px; white-space:nowrap; }
+  .brand-badge{ width:32px; height:32px; border-radius:9px; flex-shrink:0; background:var(--white); display:flex; align-items:center; justify-content:center; box-shadow: 0 3px 10px rgba(80,20,40,0.16); overflow:hidden; }
+  .brand-badge img{ width:100%; height:100%; object-fit:cover; }
+  .nav-links{ display:flex; gap:clamp(14px, 2.2vw, 26px); list-style:none; margin:0; padding:0; }
+  .nav-links a{ color:var(--slate); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
+  .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.current{ color:var(--rose-deep); }
+  .nav-cta{ background:var(--ink); color:var(--white); padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; text-decoration:none; white-space:nowrap; transition: background .25s ease; }
+  .nav-cta:hover, .nav-cta:focus-visible{ background:var(--rose-deep); }
+  .hamburger{ display:none; position:relative; width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--white); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .hamburger span{ display:block; width:15px; height:1.6px; background:var(--ink); border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
+  .hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  @media (max-width:760px){ .nav-links, .nav-cta{ display:none; } .nav{ gap:14px; padding:8px 8px 8px 14px; } .hamburger{ display:flex; } }
+
+  /* ---------- Drawer ---------- */
+  .drawer-overlay{ position:fixed; inset:0; z-index:190; background:rgba(36,21,18,0.35); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; visibility:hidden; transition:opacity .35s ease, visibility .35s ease; }
+  .drawer-overlay.open{ opacity:1; visibility:visible; }
+  .drawer{
+    position:fixed; top:0; right:0; bottom:0; z-index:195; width:min(80vw, 320px);
+    padding: calc(28px + env(safe-area-inset-top,0px)) 28px 28px 40px;
+    background:linear-gradient(165deg, #ffffff, var(--cream-2)); border-left:1px solid var(--line);
+    box-shadow:-30px 0 70px rgba(80,20,40,0.14); transform:translateX(105%);
+    transition:transform .5s cubic-bezier(.2,.9,.25,1.12); overflow:hidden;
+  }
+  .drawer.open{ transform:translateX(0); }
+  .drawer-wave{ position:absolute; left:-1px; top:0; height:100%; width:40px; fill:rgba(158,58,92,0.16); transform:scaleX(0); transform-origin:right center; transition:transform .55s cubic-bezier(.3,1.4,.4,1) .05s; }
+  .drawer.open .drawer-wave{ transform:scaleX(1); }
+  .drawer-droplets{ position:absolute; inset:0; pointer-events:none; overflow:visible; z-index:0; }
+  .droplet{ position:absolute; left:0; border-radius:50%; background:radial-gradient(circle at 32% 30%, rgba(255,255,255,0.95), rgba(201,162,39,0.55) 60%, rgba(201,162,39,0) 75%); opacity:0; animation:droplet-burst .7s ease-out forwards; }
+  @keyframes droplet-burst{ 0%{ opacity:0; transform:translate(0,0) scale(0.3); } 12%{ opacity:1; } 100%{ opacity:0; transform:translate(var(--dx), var(--dy)) scale(1); } }
+  .drawer-close{ position:relative; z-index:2; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:var(--white); cursor:pointer; display:flex; align-items:center; justify-content:center; margin-bottom:30px; }
+  .drawer-close svg{ width:14px; height:14px; stroke:var(--ink); fill:none; stroke-width:1.6; }
+  .drawer-nav{ position:relative; z-index:2; display:flex; flex-direction:column; gap:20px; }
+  .drawer-nav a{ color:var(--ink); text-decoration:none; font-size:20px; font-weight:600; opacity:0; transform:translateX(14px); transition:opacity .4s ease, transform .4s ease, color .2s ease; }
+  .drawer.open .drawer-nav a{ opacity:1; transform:translateX(0); }
+  .drawer.open .drawer-nav a:nth-child(1){ transition-delay:.12s; }
+  .drawer.open .drawer-nav a:nth-child(2){ transition-delay:.16s; }
+  .drawer.open .drawer-nav a:nth-child(3){ transition-delay:.20s; }
+  .drawer.open .drawer-nav a:nth-child(4){ transition-delay:.24s; }
+  .drawer.open .drawer-nav a:nth-child(5){ transition-delay:.28s; }
+  .drawer-nav a:hover{ color:var(--rose-deep); }
+  .drawer-nav a.drawer-cta{ margin-top:6px; align-self:flex-start; font-size:13.5px; background:var(--ink); color:var(--white); border-radius:999px; padding:10px 20px; }
+  @media (prefers-reduced-motion: reduce){ .drawer{ transition:transform .25s ease; } .drawer-wave{ transition:none; } .droplet{ display:none; } .drawer-nav a{ opacity:1; transform:none; transition:color .2s ease; } }
+
+  /* ---------- Page hero (inner pages) ---------- */
+  .page-hero{ position:relative; z-index:1; padding: calc(150px + env(safe-area-inset-top,0px)) 24px 60px; text-align:center; background: radial-gradient(ellipse 900px 500px at 50% 0%, rgba(158,58,92,0.12), transparent 60%), var(--white); }
+  .page-hero-kicker{ font-size:12.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rose-deep); margin:0 0 16px; }
+  .page-hero-title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(28px, 4.6vw, 46px); line-height:1.18; max-width:20ch; margin:0 auto 16px; color:var(--ink); }
+  .page-hero-sub{ font-size:15px; color:var(--slate); max-width:52ch; margin:0 auto; line-height:1.7; }
+
+  /* ---------- Section shell ---------- */
+  .section{ padding:70px 24px; }
+  .section-alt{ background:var(--cream-2); }
+  .section-inner{ max-width:760px; margin:0 auto; }
+  .section-inner--wide{ max-width:960px; }
+  .section-kicker{ font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rose-deep); margin:0 0 14px; text-align:center; }
+  .section-title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(24px,3.2vw,34px); text-align:center; margin:0 0 16px; color:var(--ink); }
+  .section-sub{ font-size:15px; color:var(--slate); text-align:center; max-width:56ch; margin:0 auto 48px; line-height:1.7; }
+
+  /* ---------- Phone mockup (Invita real UI) ---------- */
+  .phone{ position:relative; z-index:1; width:230px; height:468px; background:#241512; border-radius:38px; padding:10px; box-shadow: 0 30px 70px rgba(80,20,40,0.26); flex-shrink:0; }
+  .phone--lg{ width:270px; height:550px; }
+  .phone-screen{ width:100%; height:100%; border-radius:28px; overflow:hidden; background:var(--cream); display:flex; flex-direction:column; }
+  .ph-top{ padding:14px 14px 6px; }
+  .ph-brand{ display:flex; align-items:center; gap:5px; margin-bottom:10px; }
+  .ph-brand .heart{ width:16px; height:16px; border-radius:5px; background:linear-gradient(135deg,#f3c6d6,var(--rose)); }
+  .ph-brand span{ font-family:'Fraunces', serif; font-style:italic; font-size:10px; color:var(--rose-deep); }
+  .ph-top h1{ font-family:'Fraunces', serif; font-size:15px; font-weight:500; margin:0 0 3px; color:var(--ink); }
+  .ph-top p{ font-size:8px; color:var(--slate); margin:0; }
+  .ph-cta{ margin:10px 14px 0; background:var(--rose); border-radius:14px; padding:10px; display:flex; align-items:center; gap:9px; }
+  .ph-cta .plus{ width:24px; height:24px; border-radius:50%; background:var(--cream); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .ph-cta .plus svg{ width:10px; height:10px; stroke:var(--rose-deep); fill:none; stroke-width:2.5; }
+  .ph-cta .txt{ flex:1; }
+  .ph-cta .t1{ font-family:'Fraunces', serif; font-size:9.5px; color:var(--white); font-weight:500; }
+  .ph-cta .t2{ font-size:6.5px; color:rgba(255,255,255,0.85); margin-top:2px; line-height:1.4; }
+  .ph-cta .chev{ width:8px; height:8px; stroke:var(--white); fill:none; stroke-width:2; }
+  .ph-section-head{ display:flex; align-items:center; justify-content:space-between; margin:12px 14px 7px; }
+  .ph-section-head .lbl{ font-family:'Fraunces', serif; font-size:10.5px; color:var(--ink); }
+  .ph-section-head .more{ font-size:7px; color:var(--rose-deep); font-weight:600; }
+  .ph-models{ display:flex; gap:7px; margin:0 14px; }
+  .ph-model{ flex:1; border-radius:10px; overflow:hidden; background:var(--navy); aspect-ratio:3/4; position:relative; padding:6px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .ph-model.pale{ background:#E7DEE6; }
+  .ph-model .orn{ position:absolute; top:5px; left:5px; right:5px; height:40%; background:radial-gradient(circle at 50% 0%, rgba(201,162,39,0.5), transparent 70%); }
+  .ph-model .t1{ font-family:'Fraunces', serif; font-style:italic; font-size:6.5px; color:var(--gold); position:relative; z-index:1; }
+  .ph-model .t2{ font-size:5px; color:#E9D9A8; position:relative; z-index:1; margin-top:2px; }
+  .ph-model-label{ font-size:6px; color:var(--slate); text-align:center; margin-top:4px; }
+  .ph-models-row{ display:flex; gap:7px; margin:0 14px; }
+  .ph-models-col{ flex:1; }
+  .ph-empty-wrap{ margin:14px 14px 0; }
+  .ph-empty-wrap p{ font-size:7.5px; color:var(--slate); }
+  .ph-spacer{ flex:1; }
+  .ph-tabbar{ display:flex; justify-content:space-around; padding:9px 3px; border-top:1px solid var(--line); background:var(--white); }
+  .ph-tab{ display:flex; flex-direction:column; align-items:center; gap:3px; }
+  .ph-tab svg{ width:14px; height:14px; stroke:var(--slate); fill:none; stroke-width:1.7; }
+  .ph-tab.active svg{ stroke:var(--rose-deep); }
+  .ph-tab span{ font-size:6px; color:var(--slate); }
+  .ph-tab.active span{ color:var(--rose-deep); font-weight:600; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--ink); color:var(--white); padding:64px 24px 30px; }
+  .footer-inner{ max-width:1040px; margin:0 auto; }
+  .footer-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:44px; padding-bottom:44px; }
+  .footer-brand p{ color:#CBB8B0; font-size:13px; line-height:1.7; margin:10px 0 0; max-width:260px; }
+  .footer-brand .brand{ color:var(--white); }
+  .footer-cols{ display:flex; gap:clamp(28px,5vw,60px); flex-wrap:wrap; }
+  .footer-col h4{ font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#A68E85; margin:0 0 14px; }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-col a{ color:#E0D2CC; text-decoration:none; font-size:13.5px; }
+  .footer-col a:hover{ color:var(--white); }
+  .footer-bottom{ display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:#A68E85; }
+  .footer-bottom a{ color:#A68E85; text-decoration:none; }
+  .footer-bottom a:hover{ color:var(--white); }
+
+
+  .support-wrap{ padding:20px 24px 60px; display:flex; justify-content:center; }
+  .support-inner{ max-width:720px; width:100%; }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 2px; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); }
+  .faq-q .plus{ flex-shrink:0; width:22px; height:22px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; position:relative; transition:transform .3s ease, background .3s ease; }
+  .faq-q .plus::before, .faq-q .plus::after{ content:''; position:absolute; background:var(--rose-deep); transition:opacity .2s ease; }
+  .faq-q .plus::before{ width:9px; height:1.4px; }
+  .faq-q .plus::after{ width:1.4px; height:9px; }
+  .faq-item.open .faq-q .plus{ background:var(--rose-deep); transform:rotate(180deg); }
+  .faq-item.open .faq-q .plus::before, .faq-item.open .faq-q .plus::after{ background:var(--white); }
+  .faq-item.open .faq-q .plus::after{ opacity:0; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .faq-a-inner{ padding:0 2px 22px; font-size:14px; line-height:1.75; color:var(--slate); }
+  .support-cta{ margin-top:48px; text-align:center; padding:36px 28px; border-radius:22px; background:var(--rose-pale); }
+  .support-cta h3{ font-family:'Fraunces', serif; font-weight:500; font-size:17px; color:var(--ink); margin:0 0 10px; }
+  .support-cta p{ font-size:13.5px; color:var(--slate); margin:0 0 20px; }
+  .support-cta a{ display:inline-flex; align-items:center; gap:8px; background:var(--rose-deep); color:var(--white); text-decoration:none; font-size:13.5px; font-weight:600; border-radius:999px; padding:11px 22px; }
+
+</style>
+</head>
+<body>
+
+  <div class="nav-wrap">
+    <nav class="nav" id="siteNav">
+      <a href="index.html#accueil" class="brand">
+        <span class="brand-badge"><img src="assets/icon.png" alt="Invita"></span>
+        Invita
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="invita-fonctionnalites.html">Fonctionnalités</a></li>
+        <li><a href="invita-guide.html">Guide</a></li>
+        <li><a href="invita-support.html" class="current">Support</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Contact</a>
+      <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+    <div class="drawer-droplets" id="drawerDroplets"></div>
+    <svg class="drawer-wave" viewBox="0 0 40 300" preserveAspectRatio="none">
+      <path d="M40,0 L14,0 C22,40 6,70 18,110 C30,150 8,180 20,220 C30,255 14,275 40,300 Z"></path>
+    </svg>
+    <button type="button" class="drawer-close" id="drawerClose" aria-label="Fermer le menu">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav class="drawer-nav">
+      <a href="index.html#accueil" data-drawer-link>Accueil</a>
+      <a href="invita-fonctionnalites.html" data-drawer-link>Fonctionnalités</a>
+      <a href="invita-guide.html" data-drawer-link>Guide</a>
+      <a href="invita-support.html" data-drawer-link class="current">Support</a>
+      <a href="index.html#contact" class="drawer-cta" data-drawer-link>Contact</a>
+    </nav>
+  </aside>
+
+
+  <header class="page-hero">
+    <p class="page-hero-kicker">Support</p>
+    <h1 class="page-hero-title">Questions fréquemment posées</h1>
+    <p class="page-hero-sub">Retrouvez ici les réponses aux questions les plus courantes sur Invita.</p>
+  </header>
+
+  <section class="support-wrap">
+    <div class="support-inner">
+      <div class="faq-list">
+
+        <div class="faq-item open">
+          <button type="button" class="faq-q"><span>Mes invités doivent-ils installer une application ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Non. Ils ouvrent le lien reçu et l'invitation s'affiche directement dans leur navigateur.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Quelle est la différence entre une invitation simple et une invitation spéciale ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">La simple a un seul lien pour tous. La spéciale a une liste d'invités : chacun reçoit son propre lien, et son nom figure sur l'enveloppe et sur le billet.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Comment créer un compte ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Téléchargez l'application, inscrivez-vous avec votre nom, votre email et un mot de passe, puis saisissez le code à 6 chiffres reçu par email. Le détail est sur la page Guide d'utilisation.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Je n'ai pas reçu le code de vérification. Que faire ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Vérifiez vos courriers indésirables. Vous pouvez demander un nouveau code au bout de 60 secondes (5 envois par heure au maximum). Chaque code est valable 10 minutes et permet 5 essais.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>J'ai oublié mon mot de passe. Que faire ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sur l'écran de connexion, touchez « Mot de passe oublié ? », saisissez votre email, puis le code reçu, et choisissez un nouveau mot de passe. Vos autres appareils sont alors déconnectés.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Puis-je modifier une invitation déjà créée ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Pas pour le moment. Créez une nouvelle invitation avec les bonnes informations, partagez son lien, puis supprimez l'ancienne.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Combien de temps mon invitation reste-t-elle visible ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Jusqu'à la fin du lendemain de l'événement. Ensuite, le lien affiche que l'invitation n'est plus disponible.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Comment ajouter des photos et une musique ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">À l'étape « Photos et musique », facultative. Jusqu'à deux photos (8 Mo chacune) avec une description de 140 caractères, et une musique MP3 ou M4A de 10 Mo au maximum. Vous confirmez que vous avez le droit de diffuser la musique.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Pourquoi la musique ne démarre-t-elle pas toute seule ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Les navigateurs interdisent de lancer un son sans action de la personne. La musique démarre dès que l'invité touche l'écran, et il peut la couper.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Comment télécharger le billet ou la liste des invités en PDF ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Le billet : bouton « Enregistrer en PDF » sur la page de l'invitation, ou depuis l'application. La liste des invités : dans l'écran d'une invitation spéciale, « Télécharger la liste (PDF) ».</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Combien d'invités puis-je ajouter ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Jusqu'à 1 000 invités par invitation spéciale.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Comment supprimer une invitation ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Dans l'onglet Invitations, ouvrez l'invitation puis touchez Supprimer. Le lien cesse de fonctionner et ses photos et sa musique sont effacées.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Les invitations sont-elles privées ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Toute personne qui possède le lien d'une invitation peut la consulter. Ne partagez le lien qu'avec les personnes que vous souhaitez inviter.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Invita permet-il de recueillir les réponses des invités ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Non. Il n'y a pas de confirmation de présence en ligne. La liste des invités en PDF contient une colonne Présence pour noter les présences à la main.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Dans quelles langues Invita est-il disponible ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">En 13 langues : français, arabe, anglais, chinois, portugais, espagnol, allemand, russe, japonais, coréen, italien, turc et hindi. Changez la langue de l'application dans l'onglet Profil, et celle du billet à l'étape « Informations ».</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Mes données sont-elles en sécurité ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Toutes les communications sont chiffrées (HTTPS). Votre mot de passe est protégé par un hachage sécurisé et n'est jamais stocké en clair. Les photos sont nettoyées de leurs données de localisation. Les détails sont dans la Politique de confidentialité.</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q"><span>Comment supprimer mon compte et mes données ?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Écrivez-nous à contact@mail-invita.3amoon.com depuis l'adresse de votre compte, avec pour objet « Suppression de mon compte ». Votre compte, vos invitations, vos listes d'invités, vos photos et votre musique sont alors effacés.</div></div>
+        </div>
+      </div>
+
+      <div class="support-cta">
+        <h3>Vous ne trouvez pas votre réponse ?</h3>
+        <p>Notre équipe vous répond directement par email.</p>
+        <a href="index.html#contact">Contacter le support
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand">Invita</span>
+          <p>Vos invitations, simplement.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Application</h4>
+            <ul>
+              <li><a href="invita-fonctionnalites.html">Fonctionnalités</a></li>
+              <li><a href="invita-guide.html">Guide d'utilisation</a></li>
+              <li><a href="invita-support.html">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Invita</h4>
+            <ul>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Légal</h4>
+            <ul>
+              <li><a href="invita-confidentialite.html">Confidentialité</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Invita.</span>
+      </div>
+    </div>
+  </footer>
+
+
+<script>
+
+(function(){
+  var nav = document.getElementById('siteNav');
+  function applyNav(){ if(window.scrollY > 30){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  window.addEventListener('scroll', applyNav, { passive:true });
+  applyNav();
+
+  var hamburger = document.getElementById('hamburgerBtn');
+  var drawer = document.getElementById('drawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var drawerClose = document.getElementById('drawerClose');
+  var dropletsHost = document.getElementById('drawerDroplets');
+  var drawerLinks = document.querySelectorAll('[data-drawer-link]');
+
+  function spawnDroplets(){
+    dropletsHost.innerHTML = '';
+    var count = 16;
+    var h = drawer.offsetHeight || 600;
+    for(var i=0;i<count;i++){
+      var d = document.createElement('span');
+      d.className = 'droplet';
+      var size = 4 + Math.random()*10;
+      var top = 40 + Math.random()*(h-80);
+      var dx = 18 + Math.random()*70;
+      var dy = (Math.random()-0.5)*90;
+      d.style.width = size+'px'; d.style.height = size+'px'; d.style.top = top+'px';
+      d.style.setProperty('--dx', dx+'px'); d.style.setProperty('--dy', dy+'px');
+      d.style.animationDelay = (Math.random()*0.12)+'s';
+      dropletsHost.appendChild(d);
+    }
+  }
+  function openDrawer(){
+    drawer.classList.add('open'); drawerOverlay.classList.add('open');
+    drawer.setAttribute('aria-hidden','false'); hamburger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden'; spawnDroplets(); drawerClose.focus();
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open'); drawerOverlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true'); hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = ''; hamburger.focus();
+  }
+  hamburger.addEventListener('click', function(){ drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  drawerLinks.forEach(function(l){ l.addEventListener('click', closeDrawer); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && drawer.classList.contains('open')) closeDrawer(); });
+
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    function setState(open){
+      if(open){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      else{ item.classList.remove('open'); a.style.maxHeight = 0; }
+    }
+    setState(item.classList.contains('open'));
+    q.addEventListener('click', function(){ setState(!item.classList.contains('open')); });
+  });
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('.faq-item.open .faq-a').forEach(function(a){ a.style.maxHeight = a.scrollHeight + 'px'; });
+  });
+
+})();
+</script>
+</body>
+</html>

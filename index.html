@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invita | Créez et partagez de belles invitations numériques</title>
+<meta name="description" content="Invita : créez une invitation numérique élégante pour un mariage, un anniversaire, un baptême ou une fête, avec ouverture animée, photos et musique, puis partagez-la par lien. Vos invités n'installent rien.">
+<meta name="keywords" content="Invita, invitation numérique, faire-part digital, invitation mariage, invitation anniversaire, QR code mariage">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://invita.app/">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invita">
+<meta property="og:title" content="Invita | Créez et partagez de belles invitations numériques">
+<meta property="og:description" content="Choisissez un modèle, vos couleurs et une ouverture animée, puis envoyez le lien par WhatsApp, SMS ou Telegram.">
+<meta property="og:url" content="https://invita.app/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://invita.app/assets/logo_full.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Invita",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Android, iOS",
+  "description": "Invita permet de creer des invitations numeriques elegantes (mariage, anniversaire, bapteme, fete) avec ouverture animee, photos et musique, puis de les partager par lien.",
+  "inLanguage": ["fr","ar","en","zh","pt","es","de","ru","ja","ko","it","tr","hi"]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --cream:#FDF8F3; --cream-2:#FFFCF9;
+    --rose:#9E3A5C; --rose-deep:#7A2847; --rose-pale:#FBEAF0;
+    --gold:#C9A227; --gold-deep:#A3831A; --navy:#15204A;
+    --ink:#241512; --slate:#6E5F58; --line:#F0E1E6; --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: calc(92px + env(safe-area-inset-top,0px));}
+  html,body{margin:0; padding:0; background:var(--white); color:var(--ink);}
+  body{
+    font-family:'Space Grotesk', -apple-system, sans-serif; font-weight:400;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img{max-width:100%; display:block;}
+  a{ color:inherit; }
+  ::selection{ background:var(--rose); color:var(--white); }
+  .serif{ font-family:'Fraunces', Georgia, serif; }
+
+  /* ---------- Header ---------- */
+  .nav-wrap{ position:fixed; top: calc(16px + env(safe-area-inset-top,0px)); left:0; right:0; display:flex; justify-content:center; z-index:100; padding: 0 20px; pointer-events:none; }
+  .nav{
+    pointer-events:auto; display:flex; align-items:center; gap:clamp(18px, 3vw, 40px);
+    padding: 9px 14px; border-radius:999px; background:rgba(255,255,255,0.82);
+    border:1px solid var(--line); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 8px 28px rgba(80,20,40,0.09); transition: background .4s ease, box-shadow .4s ease; max-width: calc(100vw - 24px);
+  }
+  .nav.scrolled{ background: rgba(255,255,255,0.96); box-shadow: 0 8px 28px rgba(80,20,40,0.15); }
+  .brand{ font-weight:700; font-size:17px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:9px; white-space:nowrap; }
+  .brand-badge{ width:32px; height:32px; border-radius:9px; flex-shrink:0; background:var(--white); display:flex; align-items:center; justify-content:center; box-shadow: 0 3px 10px rgba(80,20,40,0.16); overflow:hidden; }
+  .brand-badge img{ width:100%; height:100%; object-fit:cover; }
+  .nav-links{ display:flex; gap:clamp(14px, 2.2vw, 26px); list-style:none; margin:0; padding:0; }
+  .nav-links a{ color:var(--slate); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
+  .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.current{ color:var(--rose-deep); }
+  .nav-cta{ background:var(--ink); color:var(--white); padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; text-decoration:none; white-space:nowrap; transition: background .25s ease; }
+  .nav-cta:hover, .nav-cta:focus-visible{ background:var(--rose-deep); }
+  .hamburger{ display:none; position:relative; width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--white); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .hamburger span{ display:block; width:15px; height:1.6px; background:var(--ink); border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
+  .hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  @media (max-width:760px){ .nav-links, .nav-cta{ display:none; } .nav{ gap:14px; padding:8px 8px 8px 14px; } .hamburger{ display:flex; } }
+
+  /* ---------- Drawer ---------- */
+  .drawer-overlay{ position:fixed; inset:0; z-index:190; background:rgba(36,21,18,0.35); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; visibility:hidden; transition:opacity .35s ease, visibility .35s ease; }
+  .drawer-overlay.open{ opacity:1; visibility:visible; }
+  .drawer{
+    position:fixed; top:0; right:0; bottom:0; z-index:195; width:min(80vw, 320px);
+    padding: calc(28px + env(safe-area-inset-top,0px)) 28px 28px 40px;
+    background:linear-gradient(165deg, #ffffff, var(--cream-2)); border-left:1px solid var(--line);
+    box-shadow:-30px 0 70px rgba(80,20,40,0.14); transform:translateX(105%);
+    transition:transform .5s cubic-bezier(.2,.9,.25,1.12); overflow:hidden;
+  }
+  .drawer.open{ transform:translateX(0); }
+  .drawer-wave{ position:absolute; left:-1px; top:0; height:100%; width:40px; fill:rgba(158,58,92,0.16); transform:scaleX(0); transform-origin:right center; transition:transform .55s cubic-bezier(.3,1.4,.4,1) .05s; }
+  .drawer.open .drawer-wave{ transform:scaleX(1); }
+  .drawer-droplets{ position:absolute; inset:0; pointer-events:none; overflow:visible; z-index:0; }
+  .droplet{ position:absolute; left:0; border-radius:50%; background:radial-gradient(circle at 32% 30%, rgba(255,255,255,0.95), rgba(201,162,39,0.55) 60%, rgba(201,162,39,0) 75%); opacity:0; animation:droplet-burst .7s ease-out forwards; }
+  @keyframes droplet-burst{ 0%{ opacity:0; transform:translate(0,0) scale(0.3); } 12%{ opacity:1; } 100%{ opacity:0; transform:translate(var(--dx), var(--dy)) scale(1); } }
+  .drawer-close{ position:relative; z-index:2; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:var(--white); cursor:pointer; display:flex; align-items:center; justify-content:center; margin-bottom:30px; }
+  .drawer-close svg{ width:14px; height:14px; stroke:var(--ink); fill:none; stroke-width:1.6; }
+  .drawer-nav{ position:relative; z-index:2; display:flex; flex-direction:column; gap:20px; }
+  .drawer-nav a{ color:var(--ink); text-decoration:none; font-size:20px; font-weight:600; opacity:0; transform:translateX(14px); transition:opacity .4s ease, transform .4s ease, color .2s ease; }
+  .drawer.open .drawer-nav a{ opacity:1; transform:translateX(0); }
+  .drawer.open .drawer-nav a:nth-child(1){ transition-delay:.12s; }
+  .drawer.open .drawer-nav a:nth-child(2){ transition-delay:.16s; }
+  .drawer.open .drawer-nav a:nth-child(3){ transition-delay:.20s; }
+  .drawer.open .drawer-nav a:nth-child(4){ transition-delay:.24s; }
+  .drawer.open .drawer-nav a:nth-child(5){ transition-delay:.28s; }
+  .drawer-nav a:hover{ color:var(--rose-deep); }
+  .drawer-nav a.drawer-cta{ margin-top:6px; align-self:flex-start; font-size:13.5px; background:var(--ink); color:var(--white); border-radius:999px; padding:10px 20px; }
+  @media (prefers-reduced-motion: reduce){ .drawer{ transition:transform .25s ease; } .drawer-wave{ transition:none; } .droplet{ display:none; } .drawer-nav a{ opacity:1; transform:none; transition:color .2s ease; } }
+
+  /* ---------- Page hero (inner pages) ---------- */
+  .page-hero{ position:relative; z-index:1; padding: calc(150px + env(safe-area-inset-top,0px)) 24px 60px; text-align:center; background: radial-gradient(ellipse 900px 500px at 50% 0%, rgba(158,58,92,0.12), transparent 60%), var(--white); }
+  .page-hero-kicker{ font-size:12.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rose-deep); margin:0 0 16px; }
+  .page-hero-title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(28px, 4.6vw, 46px); line-height:1.18; max-width:20ch; margin:0 auto 16px; color:var(--ink); }
+  .page-hero-sub{ font-size:15px; color:var(--slate); max-width:52ch; margin:0 auto; line-height:1.7; }
+
+  /* ---------- Section shell ---------- */
+  .section{ padding:70px 24px; }
+  .section-alt{ background:var(--cream-2); }
+  .section-inner{ max-width:760px; margin:0 auto; }
+  .section-inner--wide{ max-width:960px; }
+  .section-kicker{ font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rose-deep); margin:0 0 14px; text-align:center; }
+  .section-title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(24px,3.2vw,34px); text-align:center; margin:0 0 16px; color:var(--ink); }
+  .section-sub{ font-size:15px; color:var(--slate); text-align:center; max-width:56ch; margin:0 auto 48px; line-height:1.7; }
+
+  /* ---------- Phone mockup (Invita real UI) ---------- */
+  .phone{ position:relative; z-index:1; width:230px; height:468px; background:#241512; border-radius:38px; padding:10px; box-shadow: 0 30px 70px rgba(80,20,40,0.26); flex-shrink:0; }
+  .phone--lg{ width:270px; height:550px; }
+  .phone-screen{ width:100%; height:100%; border-radius:28px; overflow:hidden; background:var(--cream); display:flex; flex-direction:column; }
+  .ph-top{ padding:14px 14px 6px; }
+  .ph-brand{ display:flex; align-items:center; gap:5px; margin-bottom:10px; }
+  .ph-brand .heart{ width:16px; height:16px; border-radius:5px; background:linear-gradient(135deg,#f3c6d6,var(--rose)); }
+  .ph-brand span{ font-family:'Fraunces', serif; font-style:italic; font-size:10px; color:var(--rose-deep); }
+  .ph-top h1{ font-family:'Fraunces', serif; font-size:15px; font-weight:500; margin:0 0 3px; color:var(--ink); }
+  .ph-top p{ font-size:8px; color:var(--slate); margin:0; }
+  .ph-cta{ margin:10px 14px 0; background:var(--rose); border-radius:14px; padding:10px; display:flex; align-items:center; gap:9px; }
+  .ph-cta .plus{ width:24px; height:24px; border-radius:50%; background:var(--cream); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .ph-cta .plus svg{ width:10px; height:10px; stroke:var(--rose-deep); fill:none; stroke-width:2.5; }
+  .ph-cta .txt{ flex:1; }
+  .ph-cta .t1{ font-family:'Fraunces', serif; font-size:9.5px; color:var(--white); font-weight:500; }
+  .ph-cta .t2{ font-size:6.5px; color:rgba(255,255,255,0.85); margin-top:2px; line-height:1.4; }
+  .ph-cta .chev{ width:8px; height:8px; stroke:var(--white); fill:none; stroke-width:2; }
+  .ph-section-head{ display:flex; align-items:center; justify-content:space-between; margin:12px 14px 7px; }
+  .ph-section-head .lbl{ font-family:'Fraunces', serif; font-size:10.5px; color:var(--ink); }
+  .ph-section-head .more{ font-size:7px; color:var(--rose-deep); font-weight:600; }
+  .ph-models{ display:flex; gap:7px; margin:0 14px; }
+  .ph-model{ flex:1; border-radius:10px; overflow:hidden; background:var(--navy); aspect-ratio:3/4; position:relative; padding:6px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .ph-model.pale{ background:#E7DEE6; }
+  .ph-model .orn{ position:absolute; top:5px; left:5px; right:5px; height:40%; background:radial-gradient(circle at 50% 0%, rgba(201,162,39,0.5), transparent 70%); }
+  .ph-model .t1{ font-family:'Fraunces', serif; font-style:italic; font-size:6.5px; color:var(--gold); position:relative; z-index:1; }
+  .ph-model .t2{ font-size:5px; color:#E9D9A8; position:relative; z-index:1; margin-top:2px; }
+  .ph-model-label{ font-size:6px; color:var(--slate); text-align:center; margin-top:4px; }
+  .ph-models-row{ display:flex; gap:7px; margin:0 14px; }
+  .ph-models-col{ flex:1; }
+  .ph-empty-wrap{ margin:14px 14px 0; }
+  .ph-empty-wrap p{ font-size:7.5px; color:var(--slate); }
+  .ph-spacer{ flex:1; }
+  .ph-tabbar{ display:flex; justify-content:space-around; padding:9px 3px; border-top:1px solid var(--line); background:var(--white); }
+  .ph-tab{ display:flex; flex-direction:column; align-items:center; gap:3px; }
+  .ph-tab svg{ width:14px; height:14px; stroke:var(--slate); fill:none; stroke-width:1.7; }
+  .ph-tab.active svg{ stroke:var(--rose-deep); }
+  .ph-tab span{ font-size:6px; color:var(--slate); }
+  .ph-tab.active span{ color:var(--rose-deep); font-weight:600; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--ink); color:var(--white); padding:64px 24px 30px; }
+  .footer-inner{ max-width:1040px; margin:0 auto; }
+  .footer-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:44px; padding-bottom:44px; }
+  .footer-brand p{ color:#CBB8B0; font-size:13px; line-height:1.7; margin:10px 0 0; max-width:260px; }
+  .footer-brand .brand{ color:var(--white); }
+  .footer-cols{ display:flex; gap:clamp(28px,5vw,60px); flex-wrap:wrap; }
+  .footer-col h4{ font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#A68E85; margin:0 0 14px; }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-col a{ color:#E0D2CC; text-decoration:none; font-size:13.5px; }
+  .footer-col a:hover{ color:var(--white); }
+  .footer-bottom{ display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:#A68E85; }
+  .footer-bottom a{ color:#A68E85; text-decoration:none; }
+  .footer-bottom a:hover{ color:var(--white); }
+
+
+  .hero{ position:relative; overflow:hidden; padding: calc(140px + env(safe-area-inset-top,0px)) 24px 40px; }
+  .hero-inner{ max-width:1160px; margin:0 auto; display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; }
+  .hero-eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--rose-deep); background:var(--rose-pale); border-radius:999px; padding:6px 14px; margin-bottom:22px; }
+  .hero-title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(30px, 4.2vw, 48px); line-height:1.18; letter-spacing:-0.01em; margin:0 0 20px; color:var(--ink); max-width:15ch; }
+  .hero-title em{ font-style:italic; color:var(--rose-deep); font-weight:400; }
+  .hero-sub{ font-size:16px; line-height:1.7; color:var(--slate); max-width:46ch; margin:0 0 32px; }
+  .hero-badges{ display:flex; gap:12px; flex-wrap:wrap; }
+  .store-badge{ display:flex; align-items:center; gap:9px; background:var(--ink); color:var(--white); text-decoration:none; border-radius:12px; padding:9px 16px; font-size:12px; }
+  .store-badge svg{ width:20px; height:20px; flex-shrink:0; }
+  .store-badge .store-small{ font-size:9.5px; opacity:0.75; display:block; }
+  .store-badge .store-big{ font-size:13px; font-weight:600; }
+  .store-badge.disabled{ background:#f0e2e8; color:#b596a1; cursor:default; }
+  .store-badge.disabled svg{ opacity:0.6; }
+  .hero-visual{ position:relative; display:flex; justify-content:center; align-items:center; min-height:420px; }
+  .hero-blob{ position:absolute; width:400px; height:400px; max-width:88vw; max-height:88vw; background:linear-gradient(150deg, var(--rose-pale), #f0d9c4); border-radius:62% 38% 55% 45% / 45% 55% 45% 55%; animation:blob-morph 11s ease-in-out infinite; z-index:0; }
+  @keyframes blob-morph{ 0%,100%{ border-radius:62% 38% 55% 45% / 45% 55% 45% 55%; } 50%{ border-radius:45% 55% 40% 60% / 60% 40% 60% 40%; } }
+  @media (max-width:900px){ .hero-inner{ grid-template-columns:1fr; text-align:center; } .hero-title{ max-width:none; margin-left:auto; margin-right:auto; } .hero-sub{ margin-left:auto; margin-right:auto; } .hero-badges{ justify-content:center; } .hero-visual{ margin-top:20px; } }
+
+  .teasers{ padding:70px 24px; }
+  .teasers-inner{ max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .teaser-card{ display:block; text-decoration:none; border:1px solid var(--line); border-radius:22px; padding:28px; transition:transform .25s ease, box-shadow .25s ease; background:var(--white); }
+  .teaser-card:hover{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(80,20,40,0.1); }
+  .teaser-icon{ width:44px; height:44px; border-radius:13px; background:var(--rose-pale); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .teaser-icon svg{ width:20px; height:20px; stroke:var(--rose-deep); fill:none; stroke-width:1.6; }
+  .teaser-card h3{ font-family:'Fraunces', serif; font-weight:500; font-size:16.5px; color:var(--ink); margin:0 0 8px; }
+  .teaser-card p{ font-size:13.5px; color:var(--slate); line-height:1.6; margin:0 0 14px; }
+  .teaser-link{ font-size:12.5px; font-weight:600; color:var(--rose-deep); display:inline-flex; align-items:center; gap:5px; }
+  @media (max-width:760px){ .teasers-inner{ grid-template-columns:1fr; } }
+
+  .disclaimer{ max-width:760px; margin:0 auto; padding:0 24px 70px; text-align:center; }
+  .disclaimer p{ font-size:13px; color:var(--slate); line-height:1.7; background:var(--rose-pale); border-radius:14px; padding:16px 20px; }
+
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field{ display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{ font-size:12.5px; font-weight:600; color:var(--ink); }
+  .field input, .field textarea, .field select{ font-family:inherit; font-size:14px; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--white); outline:none; transition:border-color .2s ease; }
+  .field input:focus, .field textarea:focus, .field select:focus{ border-color:var(--rose); }
+  .field textarea{ resize:vertical; min-height:100px; }
+  .contact-submit{ display:inline-flex; align-items:center; gap:8px; justify-content:center; background:var(--rose-deep); color:var(--white); border:none; cursor:pointer; font-family:inherit; font-size:14.5px; font-weight:600; border-radius:999px; padding:13px 26px; width:100%; transition:background .2s ease; }
+  .contact-submit:hover{ background:#5e1e35; }
+  .contact-note{ font-size:12px; color:var(--slate); text-align:center; margin-top:14px; line-height:1.6; }
+  .contact-direct{ display:flex; justify-content:center; gap:26px; margin-top:36px; flex-wrap:wrap; }
+  .contact-direct a{ display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--slate); text-decoration:none; }
+  .contact-direct svg{ width:16px; height:16px; stroke:var(--rose-deep); fill:none; stroke-width:1.6; }
+  .contact-direct a:hover{ color:var(--rose-deep); }
+
+</style>
+</head>
+<body>
+
+  <div class="nav-wrap">
+    <nav class="nav" id="siteNav">
+      <a href="index.html#accueil" class="brand">
+        <span class="brand-badge"><img src="assets/icon.png" alt="Invita"></span>
+        Invita
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#accueil" class="current">Accueil</a></li>
+        <li><a href="invita-fonctionnalites.html">Fonctionnalités</a></li>
+        <li><a href="invita-guide.html">Guide</a></li>
+        <li><a href="invita-support.html">Support</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Contact</a>
+      <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+    <div class="drawer-droplets" id="drawerDroplets"></div>
+    <svg class="drawer-wave" viewBox="0 0 40 300" preserveAspectRatio="none">
+      <path d="M40,0 L14,0 C22,40 6,70 18,110 C30,150 8,180 20,220 C30,255 14,275 40,300 Z"></path>
+    </svg>
+    <button type="button" class="drawer-close" id="drawerClose" aria-label="Fermer le menu">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav class="drawer-nav">
+      <a href="index.html#accueil" data-drawer-link class="current">Accueil</a>
+      <a href="invita-fonctionnalites.html" data-drawer-link>Fonctionnalités</a>
+      <a href="invita-guide.html" data-drawer-link>Guide</a>
+      <a href="invita-support.html" data-drawer-link>Support</a>
+      <a href="index.html#contact" class="drawer-cta" data-drawer-link>Contact</a>
+    </nav>
+  </aside>
+
+
+  <section class="hero" id="accueil">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">Invitations numériques</span>
+        <h1 class="hero-title">Vos invitations, <em>belles et prêtes à partager.</em></h1>
+        <p class="hero-sub">Choisissez un modèle, vos couleurs et une ouverture animée, puis envoyez le lien par WhatsApp, SMS ou Telegram. Vos invités l'ouvrent dans leur navigateur, sans rien installer.</p>
+        <div class="hero-badges">
+          <span class="store-badge disabled">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.462 2.203-1.153 2.98-.75.845-1.977 1.494-3.02 1.408-.13-1.1.44-2.24 1.14-2.98.78-.85 2.09-1.47 3.033-1.408zM20.5 17.34c-.55 1.28-.82 1.85-1.53 2.98-.99 1.58-2.38 3.55-4.11 3.57-1.53.02-1.92-1-4-1-2.08 0-2.51.98-4.04.98-1.73 0-3.04-1.79-4.03-3.37C-.13 16.6-.6 11.66 1.36 8.98c.99-1.35 2.55-2.15 4.03-2.15 1.5 0 2.45 1.02 4.03 1.02 1.54 0 2.19-1.02 4.03-1.02 1.1 0 2.62.52 3.58 1.97-3.15 1.72-2.64 6.12.47 7.54z"/></svg>
+            <span><span class="store-small">Bientôt sur</span><span class="store-big">App Store</span></span>
+          </span>
+          <span class="store-badge disabled">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.6c-.3.3-.5.75-.5 1.3v16.2c0 .55.2 1 .5 1.3l.1.1L13 12.35v-.2L3.7 2.5l-.1.1z"/><path d="M16 15.5l-3-3v-.5l3-3 3.6 2.1c.7.4.7 1.4 0 1.8L16 15.5z"/><path d="M13 12.35L3.7 21.7c.35.3.9.35 1.4.05l10.9-6.25-3-3.15z"/><path d="M16.05 8.6L13 11.75V12l3.05-3.15 3.6-2.05c.7-.4.7-1.4 0-1.8L16.05 8.6z"/></svg>
+            <span><span class="store-small">Bientôt sur</span><span class="store-big">Google Play</span></span>
+          </span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-blob"></div>
+
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ph-top">
+              <div class="ph-brand"><div class="heart"></div><span>invita</span></div>
+              <h1>Bonjour, Abakoura</h1>
+              <p>Que c&eacute;l&eacute;brons-nous aujourd'hui&nbsp;?</p>
+            </div>
+            <div class="ph-cta">
+              <div class="plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="txt">
+                <div class="t1">Cr&eacute;er une invitation</div>
+                <div class="t2">Un mod&egrave;le, vos couleurs, une ouverture anim&eacute;e.</div>
+              </div>
+              <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+            </div>
+            <div class="ph-section-head"><span class="lbl">Nos mod&egrave;les</span></div>
+            <div class="ph-models">
+              <div class="ph-model">
+                <div class="orn"></div>
+                <div class="t1">Mariage</div>
+                <div class="t2">ALFA &amp; MARIE</div>
+              </div>
+              <div class="ph-model pale"></div>
+            </div>
+            <div class="ph-section-head"><span class="lbl">Vos invitations</span><span class="more">Tout voir</span></div>
+            <div class="ph-empty-wrap"><p>Vous n'avez pas encore d'invitation.</p></div>
+            <div class="ph-spacer"></div>
+            <div class="ph-tabbar">
+              <div class="ph-tab active"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Accueil</span></div>
+              <div class="ph-tab"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Invitations</span></div>
+              <div class="ph-tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Profil</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="teasers">
+    <div class="teasers-inner">
+      <a class="teaser-card" href="invita-fonctionnalites.html">
+        <div class="teaser-icon"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+        <h3>Fonctionnalités</h3>
+        <p>Modèles, ouvertures animées, photos, musique, liste d'invités, PDF&nbsp;: tout ce qu'Invita permet de faire.</p>
+        <span class="teaser-link">Découvrir &rarr;</span>
+      </a>
+      <a class="teaser-card" href="invita-guide.html">
+        <div class="teaser-icon"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M13 3v5h5"/></svg></div>
+        <h3>Guide d'utilisation</h3>
+        <p>Les étapes pour créer votre compte, composer votre invitation et la partager.</p>
+        <span class="teaser-link">Voir le guide &rarr;</span>
+      </a>
+      <a class="teaser-card" href="invita-support.html">
+        <div class="teaser-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg></div>
+        <h3>Support</h3>
+        <p>Les réponses aux questions les plus fréquentes sur Invita.</p>
+        <span class="teaser-link">Voir la FAQ &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    <p>Invita ne recueille pas les réponses de vos invités&nbsp;: il n'y a pas de confirmation de présence en ligne.</p>
+  </div>
+
+  <section class="section section-alt" id="contact">
+    <div class="section-inner">
+      <p class="section-kicker">Contact</p>
+      <h2 class="section-title">Une question&nbsp;? Écrivez-nous</h2>
+      <p class="section-sub">Remplissez le formulaire&nbsp;: votre application mail s'ouvrira avec le message déjà prêt, il ne restera qu'à l'envoyer.</p>
+      <form id="contactForm">
+        <div class="contact-grid">
+          <div class="field"><label for="fNom">Nom</label><input type="text" id="fNom" name="nom" required autocomplete="family-name"></div>
+          <div class="field"><label for="fPrenom">Prénom</label><input type="text" id="fPrenom" name="prenom" required autocomplete="given-name"></div>
+          <div class="field full">
+            <label for="fObjet">Objet</label>
+            <select id="fObjet" name="objet" required>
+              <option>Question sur l'application</option>
+              <option>Problème technique</option>
+              <option>Suppression de mon compte</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="field full"><label for="fMessage">Message (optionnel)</label><textarea id="fMessage" name="message" placeholder="Décrivez votre demande..."></textarea></div>
+        </div>
+        <button type="submit" class="contact-submit">Envoyer le message
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <p class="contact-note">En validant, votre application mail s'ouvre avec un message pré-rempli à destination de l'équipe Invita. Vous gardez la main pour l'envoyer.</p>
+      </form>
+      <div class="contact-direct">
+        <a href="mailto:contact@mail-invita.3amoon.com"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>contact@mail-invita.3amoon.com</a>
+        <a href="invita-confidentialite.html"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>Politique de confidentialité</a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand">Invita</span>
+          <p>Vos invitations, simplement.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Application</h4>
+            <ul>
+              <li><a href="invita-fonctionnalites.html">Fonctionnalités</a></li>
+              <li><a href="invita-guide.html">Guide d'utilisation</a></li>
+              <li><a href="invita-support.html">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Invita</h4>
+            <ul>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Légal</h4>
+            <ul>
+              <li><a href="invita-confidentialite.html">Confidentialité</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Invita.</span>
+      </div>
+    </div>
+  </footer>
+
+
+<script>
+
+(function(){
+  var nav = document.getElementById('siteNav');
+  function applyNav(){ if(window.scrollY > 30){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  window.addEventListener('scroll', applyNav, { passive:true });
+  applyNav();
+
+  var hamburger = document.getElementById('hamburgerBtn');
+  var drawer = document.getElementById('drawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var drawerClose = document.getElementById('drawerClose');
+  var dropletsHost = document.getElementById('drawerDroplets');
+  var drawerLinks = document.querySelectorAll('[data-drawer-link]');
+
+  function spawnDroplets(){
+    dropletsHost.innerHTML = '';
+    var count = 16;
+    var h = drawer.offsetHeight || 600;
+    for(var i=0;i<count;i++){
+      var d = document.createElement('span');
+      d.className = 'droplet';
+      var size = 4 + Math.random()*10;
+      var top = 40 + Math.random()*(h-80);
+      var dx = 18 + Math.random()*70;
+      var dy = (Math.random()-0.5)*90;
+      d.style.width = size+'px'; d.style.height = size+'px'; d.style.top = top+'px';
+      d.style.setProperty('--dx', dx+'px'); d.style.setProperty('--dy', dy+'px');
+      d.style.animationDelay = (Math.random()*0.12)+'s';
+      dropletsHost.appendChild(d);
+    }
+  }
+  function openDrawer(){
+    drawer.classList.add('open'); drawerOverlay.classList.add('open');
+    drawer.setAttribute('aria-hidden','false'); hamburger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden'; spawnDroplets(); drawerClose.focus();
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open'); drawerOverlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true'); hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = ''; hamburger.focus();
+  }
+  hamburger.addEventListener('click', function(){ drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  drawerLinks.forEach(function(l){ l.addEventListener('click', closeDrawer); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && drawer.classList.contains('open')) closeDrawer(); });
+
+
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nom = document.getElementById('fNom').value.trim();
+    var prenom = document.getElementById('fPrenom').value.trim();
+    var objetSelect = document.getElementById('fObjet');
+    var objet = objetSelect.options[objetSelect.selectedIndex].text;
+    var message = document.getElementById('fMessage').value.trim();
+    var subject = 'Invita — ' + objet;
+    var bodyLines = ['Nom : ' + nom, 'Prénom : ' + prenom, '', message || '(aucun message additionnel)'];
+    var body = bodyLines.join('\n');
+    var mailto = 'mailto:contact@mail-invita.3amoon.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+  });
+
+})();
+</script>
+</body>
+</html>
